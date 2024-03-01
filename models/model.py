@@ -6,7 +6,7 @@ import itertools
 from typing import List, Callable, Tuple
 
 class TyNet(nn.Module):
-    def __init__(self, num_classes: int=80, backbone: str='tf_efficientnet_lite0.in1k', out_size: int=64, **kwargs) -> None:
+    def __init__(self, num_classes: int=80, backbone: str='resnet18', out_size: int=64, **kwargs) -> None:
         """The object detector which has a changable backbone structure.
 
         Args:
@@ -82,8 +82,8 @@ class TyNeck(nn.Module):
         Returns:
             torch.tensor: Output
         """
-
-        y = self.act(self.upconv_dict[str(y.shape[1])](y))
+        key = str(y.shape[1].item()) if torch.is_tensor(y.shape[1]) else str(y.shape[1])
+        y = self.act(self.upconv_dict[key](y))
 
         return self.upsample(x) + y
 

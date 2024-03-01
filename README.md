@@ -1,4 +1,6 @@
 # TyNet, A Custom Object Detector with a Pytorch-lightning Training Pipeline
+
+# https://github.com/taylanates24/object-detection
   
   TyNet is a lightweight, powerful, and scalable CNN-based object detector. You can choose a backbone from various backbones, or you can change the model itself, and then train another model by using the training pipeline.
 

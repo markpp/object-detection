@@ -83,3 +83,29 @@ if __name__ == '__main__':
                 train_dataloaders=train_loader, 
                 val_dataloaders=val_loader)
                 
+    # save model
+    torch.save(detector.model.state_dict(), 'TyNet.pth')
+    
+    # save to onnx
+    model.eval()
+
+    # Create a dummy input tensor of the correct size
+    x = torch.randn(1, 3, 480, 480)
+
+    # Specify input and output names
+    input_names = ["input"]
+    output_names = ["output", "regression", "classification", "anchors"]
+
+    # Set dynamic axes
+    dynamic_axes = {"input" : {0 : "batch_size"}, "output" : {0 : "batch_size"}, "regression" : {0 : "batch_size"}, "classification" : {0 : "batch_size"}, "anchors" : {0 : "batch_size"}}
+
+    # Export the model
+    torch.onnx.export(model,               # model being run
+                    x,                         # model input (or a tuple for multiple inputs)
+                    "TyNet.onnx",   # where to save the model (can be a file or file-like object)
+                    export_params=True,        # store the trained parameter weights inside the model file
+                    opset_version=12,          # the ONNX version to export the model to
+                    do_constant_folding=True,  # whether to execute constant folding for optimization
+                    input_names = input_names, # the model's input names
+                    output_names = output_names, # the model's output names
+                    dynamic_axes=dynamic_axes) # variable length axes

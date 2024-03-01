@@ -32,8 +32,8 @@ cutout:
   threshold: 0.5 # if the intersextion of area of labels and cutout bboxes is exceeds the threshold, that bbox is simply dropped out.
 
 training:
-  image_path: '/workspaces/object-detection/datasets/coco128/images/train2017'
-  annotation_path: '/workspaces/object-detection/datasets/coco128_train.json'
+  image_path: '/home/aau3090/GitHub/TyNet-object-detection/datasets/coco128/images/train2017'
+  annotation_path: '/home/aau3090/GitHub/TyNet-object-detection/datasets/coco128_train.json'
   image_size: 480
   normalize: True
   augmentations: ['imgaug', 'cutout']
@@ -45,11 +45,11 @@ training:
   lr_scheduler: 'cosine' # 'cosine', 'multistep_lr', 'cosine_annealing'
   learning_rate: 0.001
   val_frequency: 1
-  epochs: 500
+  epochs: 25
 
 validation:
-  image_path: '/workspaces/object-detection/datasets/coco128/images/train2017'
-  annotation_path: '/workspaces/object-detection/datasets/coco128_train.json'
+  image_path: '/home/aau3090/GitHub/TyNet-object-detection/datasets/coco128/images/train2017'
+  annotation_path: '/home/aau3090/GitHub/TyNet-object-detection/datasets/coco128_train.json'
   batch_size: 1
   shuffle: False
   num_workers: 0
